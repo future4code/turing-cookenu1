@@ -2,6 +2,7 @@ import express from "express";
 import { AddressInfo } from "net";
 import dotenv from 'dotenv';
 import { signup } from "./endpoints/signup";
+import { login } from "./endpoints/login";
 
 dotenv.config();
 
@@ -18,4 +19,4 @@ const server = app.listen(process.env.PORT || 3000, () => {
     });
 
     app.post('/user/signup', signup);
-    console.log('oi')
+    app.post('/login', login);

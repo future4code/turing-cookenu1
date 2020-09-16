@@ -10,7 +10,8 @@ export const signup = async (req: Request, res: Response) => {
         const userData = {
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            role: req.body.role
         }
 
         if (!userData.name || !userData.email || !userData.password) {
@@ -36,11 +37,12 @@ export const signup = async (req: Request, res: Response) => {
             id,
             userData.name,
             userData.email,
-            cypherPassword
+            cypherPassword,
+            userData.role
         );
 
         const auth = new Authenticator();
-        const token = auth.generateToken({id});
+        const token = auth.generateToken({id, role: userData.role });
 
         res.status(200).send({
             token
