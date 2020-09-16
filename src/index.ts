@@ -18,3 +18,4 @@ const server = app.listen(process.env.PORT || 3000, () => {
     });
 
     app.post('/user/signup', signup);
+    console.log('oi')
