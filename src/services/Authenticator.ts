@@ -23,5 +23,10 @@ export class Authenticator {
 
 export interface AuthenticationData {
     id: string;
-    role: string;
+    role: USER_ROLES;
 }
+
+export enum USER_ROLES {
+    ADMIN = 'ADMIN',
+    NORMAL = 'NORMAL'
+  }

@@ -14,7 +14,7 @@ export const signup = async (req: Request, res: Response) => {
             role: req.body.role
         }
 
-        if (!userData.name || !userData.email || !userData.password) {
+        if (!userData.name || !userData.email || !userData.password || !userData.role) {
             throw new Error('Insira todas as informações necessárias para o cadastro')
         }
         
