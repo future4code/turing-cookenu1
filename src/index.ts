@@ -6,6 +6,7 @@ import { login } from "./endpoints/login";
 import { getUserProfile } from "./endpoints/getUserProfile";
 import { getOtherUserProfile } from "./endpoints/getOtherUserProfile";
 import { createRecipe } from "./endpoints/createRecipe";
+import { getRecipeById } from "./endpoints/getRecipeById";
 
 dotenv.config();
 
@@ -26,3 +27,4 @@ const server = app.listen(process.env.PORT || 3000, () => {
     app.get('/user/profile', getUserProfile);
     app.get('/user/:id', getOtherUserProfile);
     app.post('/recipe', createRecipe);
+    app.get('/recipe/:id', getRecipeById);
