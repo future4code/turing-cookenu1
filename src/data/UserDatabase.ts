@@ -63,4 +63,23 @@ export class UserDatabase extends BaseDatabase {
         .where({user_to_follow_id, user_follower_id})
         .delete()
     };
+    
+    public async getRecipesFeed(user_id: string): Promise<any> {
+        const result = await this.getConnection().raw(`
+        SELECT
+        CookenuUsers.id,
+        CookenuUsers.name,
+        Recipes.recipe_id,
+        Recipes.title,
+        Recipes.description,
+        Recipes.creation_date
+        FROM CookenuUsers
+        JOIN Recipes
+        ON CookenuUsers.id = Recipes.user_id
+        JOIN UserFollowList
+        ON Recipes.user_id = user_to_follow_id
+        WHERE user_follower_id = '${user_id}';
+        `)
+        return result[0];
+    };
 };
