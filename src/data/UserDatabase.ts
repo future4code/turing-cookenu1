@@ -3,6 +3,7 @@ import { BaseDatabase } from "./BaseDatabase";
 export class UserDatabase extends BaseDatabase {
     private static TABLE_USERS: string = 'CookenuUsers';
     private static TABLE_RECIPES: string = 'Recipes';
+    private static TABLE_USER_FOLLOW: string = 'UserFollowList';
 
     public async createUser(id: string, name: string, email: string, password: string, role: string): Promise<void> {
         await this.getConnection()
@@ -48,5 +49,18 @@ export class UserDatabase extends BaseDatabase {
         .from(UserDatabase.TABLE_RECIPES)
         .where({recipe_id})
         return result[0]
+    };
+    
+    public async followUser(user_follower_id: string, user_to_follow_id: string): Promise<void> {
+        await this.getConnection()
+        .insert({user_follower_id, user_to_follow_id})
+        .into(UserDatabase.TABLE_USER_FOLLOW)
+    };
+    
+    public async unfollowUser(user_follower_id: string, user_to_follow_id: string): Promise<void> {
+        await this.getConnection()
+        .from(UserDatabase.TABLE_USER_FOLLOW)
+        .where({user_to_follow_id, user_follower_id})
+        .delete()
     };
 };

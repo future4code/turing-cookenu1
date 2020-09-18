@@ -9,7 +9,6 @@ moment.locale('pt-br');
 export const createRecipe = async (req: Request, res: Response) => {
     try{
         const token = req.headers.authorization as string;
-        console.log(token)
 
         const authenticator = new Authenticator();
         const authenticationData = authenticator.getData(token);
