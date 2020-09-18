@@ -9,7 +9,6 @@ moment.locale('pt-br');
 export const createRecipe = async (req: Request, res: Response) => {
     try{
         const token = req.headers.authorization as string;
-        console.log(token)
 
         const authenticator = new Authenticator();
         const authenticationData = authenticator.getData(token);
@@ -29,7 +28,7 @@ export const createRecipe = async (req: Request, res: Response) => {
         const idGenerator = new IdGenerator();
         const recipe_id = idGenerator.generate();
 
-        const creation_date: string = moment().format('YYYY-MM-DD')
+        const creation_date: string = moment().format('DD/MM/YYYY HH:mm:ss')
 
         const userDatabase = new UserDatabase();
         await userDatabase.createRecipe(
